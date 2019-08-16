@@ -2,6 +2,8 @@
 
 Greitas būdas analizuoti vidutines algas.
 
+[Veikiantis puslapis](https://pinigai.ffff.lt)
+
 ## Pradėti darbą
 
 Instaliuojame:
