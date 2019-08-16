@@ -3,14 +3,39 @@
     import VirtualList from '@sveltejs/svelte-virtual-list';
 
     import Company from './Company.svelte';
+    import CompanyHeader from './CompanyHeader.svelte';
 
     let data = [];
+    let dataToShow = [];
     let promise;
+
+    let windowWidth;
+    let windowHeight;
 
     async function getData(month) {
         const response = await fetch(`/data/${month}.json`);
         const json = await response.json();
         data = json;
+        dataToShow = data;
+    }
+
+    function sort(event) {
+        const { column, asc } = event.detail;
+        if (!column) {
+            dataToShow = data;
+        } else {
+            let copyData = [...data];
+            copyData.sort((a, b) =>
+                column === 'i' || column === 'w'
+                    ? asc
+                        ? a[column] - b[column]
+                        : b[column] - a[column]
+                    : asc
+                    ? (a[column] || '').localeCompare(b[column] || '')
+                    : (b[column] || '').localeCompare(a[column] || ''),
+            );
+            dataToShow = copyData;
+        }
     }
 
     onMount(async function() {
@@ -20,18 +45,20 @@
 
 <style>
     .companies {
-        height: 100%;
         min-width: 400px;
     }
 </style>
+
+<svelte:window bind:innerWidth={windowWidth} bind:innerHeight={windowHeight} />
 
 <h1>Pinigai</h1>
 
 {#await promise}
     <p>Palaukite, duomenys kraunami...</p>
 {:then}
-    <div class="companies">
-        <VirtualList items={data} let:item>
+    <div class="companies" style="height: {windowHeight - 200}px ">
+        <CompanyHeader on:sort={sort} />
+        <VirtualList items={dataToShow} let:item>
             <Company company={item} />
         </VirtualList>
     </div>
