@@ -158,7 +158,7 @@
             100
         </label>
         {#if itemsPerPage}
-            <PageSelector total={data.length} {itemsPerPage} bind:pageNo />
+            <PageSelector total={dataToShow.length} {itemsPerPage} bind:pageNo />
         {/if}
     </div>
 
