@@ -1,5 +1,6 @@
 <script>
     export let company;
+    export let active;
 </script>
 
 <style>
@@ -34,9 +35,13 @@
     .municipality {
         width: 18%;
     }
+
+    .active {
+        background-color: #ccf;
+    }
 </style>
 
-<div class={company.idx % 2 === 0 ? 'odd' : 'even'}>
+<div class={company.idx % 2 === 0 ? 'odd' : 'even'} class:active on:click>
     <span class="name">{company.n}</span>
     <span class="insured">{company.i}</span>
     <span class="wage">{company.w}</span>

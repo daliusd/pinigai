@@ -18,6 +18,11 @@
     let sortColumn;
     let sortAsc;
 
+    let lastClickedCompany;
+    let nameFilter = '';
+    let econFilter = '';
+    let municipalityFilter = '';
+
     $: {
         if (!sortColumn) {
             sortedData = data;
@@ -51,6 +56,13 @@
     onMount(async function() {
         promise = getData('201906');
     });
+
+    function handleCompanyClick(company) {
+        lastClickedCompany = company.n;
+        nameFilter = company.n;
+        econFilter = company.e || '';
+        municipalityFilter = company.m;
+    }
 </script>
 
 <style>
@@ -98,10 +110,19 @@
         <PageSelector total={data.length} {itemsPerPage} bind:pageNo />
     {/if}
 
-    <div class="companies" style="height: {windowHeight - 200}px ">
+    <div>
+        <input bind:value={nameFilter} placeholder="Vardas" />
+        <input bind:value={econFilter} placeholder="Veikla" />
+        <input bind:value={municipalityFilter} placeholder="Regionas" />
+    </div>
+
+    <div class="companies" style="height: {windowHeight - 300}px ">
         <CompanyHeader bind:sortColumn bind:sortAsc />
         <VirtualList items={dataToShow} let:item>
-            <Company company={item} />
+            <Company
+                company={item}
+                active={lastClickedCompany ? lastClickedCompany === item.n : false}
+                on:click={() => handleCompanyClick(item)} />
         </VirtualList>
     </div>
 {:catch error}
