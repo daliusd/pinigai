@@ -101,13 +101,19 @@
 
 <h1>Pinigai</h1>
 
+<p>
+    Čia galite peržiūrėti Lietuvos įmonių/kompanijų/įstaigų informaciją apie vidutinę algą 2019-ųjų birželio mėnesį.
+    Informaciją galite filtruoti pagal įstaigos pavadinimą, veiklos klasifikatorių arba regioną. Taip pat paspaudę ant
+    stulpelio galite informaciją rūšiuoti.
+</p>
+
 {#await promise}
     <p>Palaukite, duomenys kraunami...</p>
 {:then}
 
     <div class="filters">
         Filtrai:
-        <input bind:value={nameFilter} placeholder="Vardas" />
+        <input bind:value={nameFilter} placeholder="Pavadinimas" />
         {#if nameFilter}
             <button on:click={() => (nameFilter = '')}>❌</button>
         {/if}
@@ -123,7 +129,7 @@
 
     <div class="companies">
         <CompanyHeader bind:sortColumn bind:sortAsc />
-        <VirtualList items={dataToShow} height="{windowHeight * 0.5}px" let:item>
+        <VirtualList items={dataToShow} height="{windowHeight * 0.4}px" let:item>
             <Company
                 company={item}
                 active={lastClickedCompany ? lastClickedCompany === item.n : false}

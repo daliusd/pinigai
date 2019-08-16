@@ -62,10 +62,12 @@
     <span on:click={() => setSortColumn('n')} class="name">
         Kompanija {sortColumn === 'n' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
-    <span on:click={() => setSortColumn('i')} class="insured">
+    <span on:click={() => setSortColumn('i')} class="insured" title="Apdraustųjų skaičius">
         Apd. {sortColumn === 'i' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
-    <span on:click={() => setSortColumn('w')} class="wage">Alga {sortColumn === 'w' ? (sortAsc ? '▲' : '▼') : ''}</span>
+    <span on:click={() => setSortColumn('w')} class="wage" title="Vidutinė alga">
+        Alga {sortColumn === 'w' ? (sortAsc ? '▲' : '▼') : ''}
+    </span>
     <span on:click={() => setSortColumn('e')} class="econ">
         Veikla {sortColumn === 'e' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
