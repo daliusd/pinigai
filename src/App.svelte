@@ -7,7 +7,7 @@
     import PageSelector from './PageSelector.svelte';
 
     let data = [];
-    let sortedData = [];
+    let interData = [];
     let dataToShow = [];
     let promise;
 
@@ -25,7 +25,7 @@
 
     $: {
         if (!sortColumn) {
-            sortedData = data;
+            interData = data;
         } else {
             let copyData = [...data];
             copyData.sort((a, b) =>
@@ -37,15 +37,28 @@
                     ? (a[sortColumn] || '').localeCompare(b[sortColumn] || '')
                     : (b[sortColumn] || '').localeCompare(a[sortColumn] || ''),
             );
-            copyData = copyData.map((i, idx) => ({ ...i, idx }));
-            sortedData = copyData;
+            interData = copyData;
         }
+
+        if (nameFilter) {
+            let filterLower = nameFilter.toLowerCase();
+            interData = interData.filter(f => f.n.toLowerCase().indexOf(filterLower) !== -1);
+        }
+        if (econFilter) {
+            let filterLower = econFilter.toLowerCase();
+            interData = interData.filter(f => f.e && f.e.toLowerCase().indexOf(filterLower) !== -1);
+        }
+        if (municipalityFilter) {
+            let filterLower = municipalityFilter.toLowerCase();
+            interData = interData.filter(f => f.m.toLowerCase().indexOf(filterLower) !== -1);
+        }
+        interData = interData.map((i, idx) => ({ ...i, idx }));
     }
 
     $: pageNo = itemsPerPage ? 0 : -1;
     $: dataToShow = itemsPerPage
-        ? sortedData.slice(pageNo * itemsPerPage, pageNo * itemsPerPage + itemsPerPage)
-        : sortedData;
+        ? interData.slice(pageNo * itemsPerPage, pageNo * itemsPerPage + itemsPerPage)
+        : interData;
 
     async function getData(month) {
         const response = await fetch(`/data/${month}.json`);
@@ -72,6 +85,15 @@
 
     label {
         display: inline-block;
+    }
+
+    .filters input {
+        padding-right: 40px;
+    }
+
+    .filters button {
+        margin-left: -40px;
+        width: 40px;
     }
 </style>
 
@@ -110,10 +132,20 @@
         <PageSelector total={data.length} {itemsPerPage} bind:pageNo />
     {/if}
 
-    <div>
+    <div class="filters">
+        Filtrai:
         <input bind:value={nameFilter} placeholder="Vardas" />
+        {#if nameFilter}
+            <button on:click={() => (nameFilter = '')}>❌</button>
+        {/if}
         <input bind:value={econFilter} placeholder="Veikla" />
+        {#if econFilter}
+            <button on:click={() => (econFilter = '')}>❌</button>
+        {/if}
         <input bind:value={municipalityFilter} placeholder="Regionas" />
+        {#if municipalityFilter}
+            <button on:click={() => (municipalityFilter = '')}>❌</button>
+        {/if}
     </div>
 
     <div class="companies" style="height: {windowHeight - 300}px ">
