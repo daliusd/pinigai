@@ -1,9 +1,8 @@
 <script>
     import { createEventDispatcher } from 'svelte';
 
-    const dispatch = createEventDispatcher();
-    let sortColumn;
-    let sortAsc;
+    export let sortColumn = undefined;
+    export let sortAsc = undefined;
 
     function setSortColumn(column) {
         if (!sortColumn || sortColumn !== column) {
@@ -15,10 +14,6 @@
             sortColumn = undefined;
             sortAsc = undefined;
         }
-        dispatch('sort', {
-            column: sortColumn,
-            asc: sortAsc,
-        });
     }
 </script>
 
@@ -59,16 +54,16 @@
 
 <div>
     <span on:click={() => setSortColumn('n')} class="name">
-        Kompanija {sortColumn === 'n' ? (sortAsc ? '▼' : '▲') : ''}
+        Kompanija {sortColumn === 'n' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
     <span on:click={() => setSortColumn('i')} class="insured">
-        Apd. {sortColumn === 'i' ? (sortAsc ? '▼' : '▲') : ''}
+        Apd. {sortColumn === 'i' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
-    <span on:click={() => setSortColumn('w')} class="wage">Alga {sortColumn === 'w' ? (sortAsc ? '▼' : '▲') : ''}</span>
+    <span on:click={() => setSortColumn('w')} class="wage">Alga {sortColumn === 'w' ? (sortAsc ? '▲' : '▼') : ''}</span>
     <span on:click={() => setSortColumn('e')} class="econ">
-        Veikla {sortColumn === 'e' ? (sortAsc ? '▼' : '▲') : ''}
+        Veikla {sortColumn === 'e' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
     <span on:click={() => setSortColumn('m')} class="municipality">
-        Regionas {sortColumn === 'm' ? (sortAsc ? '▼' : '▲') : ''}
+        Regionas {sortColumn === 'm' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
 </div>
