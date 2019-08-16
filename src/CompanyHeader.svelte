@@ -3,6 +3,7 @@
 
     export let sortColumn = undefined;
     export let sortAsc = undefined;
+    export let clientHeight;
 
     function setSortColumn(column) {
         if (!sortColumn || sortColumn !== column) {
@@ -52,7 +53,7 @@
     }
 </style>
 
-<div>
+<div bind:clientHeight>
     <span on:click={() => setSortColumn('n')} class="name">
         Kompanija {sortColumn === 'n' ? (sortAsc ? '▲' : '▼') : ''}
     </span>

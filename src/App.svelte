@@ -13,6 +13,7 @@
 
     let windowWidth;
     let windowHeight;
+    let companyHeaderHeight;
 
     let itemsPerPage = 0;
     let sortColumn;
@@ -104,33 +105,6 @@
 {#await promise}
     <p>Palaukite, duomenys kraunami...</p>
 {:then}
-    <label>
-        <input type="radio" bind:group={itemsPerPage} value={0} />
-        Nepuslapiuoti
-    </label>
-
-    <label>
-        <input type="radio" bind:group={itemsPerPage} value={10} />
-        10
-    </label>
-
-    <label>
-        <input type="radio" bind:group={itemsPerPage} value={20} />
-        20
-    </label>
-
-    <label>
-        <input type="radio" bind:group={itemsPerPage} value={50} />
-        50
-    </label>
-
-    <label>
-        <input type="radio" bind:group={itemsPerPage} value={100} />
-        100
-    </label>
-    {#if itemsPerPage}
-        <PageSelector total={data.length} {itemsPerPage} bind:pageNo />
-    {/if}
 
     <div class="filters">
         Filtrai:
@@ -148,15 +122,46 @@
         {/if}
     </div>
 
-    <div class="companies" style="height: {windowHeight - 300}px ">
-        <CompanyHeader bind:sortColumn bind:sortAsc />
-        <VirtualList items={dataToShow} let:item>
+    <div class="companies" style="height: {windowHeight * 0.5}px ">
+        <CompanyHeader bind:sortColumn bind:sortAsc bind:clientHeight={companyHeaderHeight} />
+        <VirtualList items={dataToShow} height="{windowHeight * 0.5 - companyHeaderHeight}px" let:item>
             <Company
                 company={item}
                 active={lastClickedCompany ? lastClickedCompany === item.n : false}
                 on:click={() => handleCompanyClick(item)} />
         </VirtualList>
     </div>
+
+    <div>
+        <label>
+            <input type="radio" bind:group={itemsPerPage} value={0} />
+            Nepuslapiuoti
+        </label>
+
+        <label>
+            <input type="radio" bind:group={itemsPerPage} value={10} />
+            10
+        </label>
+
+        <label>
+            <input type="radio" bind:group={itemsPerPage} value={20} />
+            20
+        </label>
+
+        <label>
+            <input type="radio" bind:group={itemsPerPage} value={50} />
+            50
+        </label>
+
+        <label>
+            <input type="radio" bind:group={itemsPerPage} value={100} />
+            100
+        </label>
+        {#if itemsPerPage}
+            <PageSelector total={data.length} {itemsPerPage} bind:pageNo />
+        {/if}
+    </div>
+
 {:catch error}
     <p style="color: red">{error.message}</p>
 {/await}
