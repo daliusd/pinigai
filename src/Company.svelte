@@ -3,6 +3,18 @@
 </script>
 
 <style>
+    .odd {
+        background-color: #fff;
+    }
+
+    .even {
+        background-color: #eee;
+    }
+
+    div:hover {
+        background-color: #fcc;
+    }
+
     span {
         display: inline-block;
     }
@@ -24,7 +36,7 @@
     }
 </style>
 
-<div>
+<div class={company.idx % 2 === 0 ? 'odd' : 'even'}>
     <span class="name">{company.n}</span>
     <span class="insured">{company.i}</span>
     <span class="wage">{company.w}</span>

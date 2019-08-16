@@ -15,7 +15,7 @@
     async function getData(month) {
         const response = await fetch(`/data/${month}.json`);
         const json = await response.json();
-        data = json;
+        data = json.map((i, idx) => ({ ...i, idx }));
         dataToShow = data;
     }
 
@@ -34,6 +34,7 @@
                     ? (a[column] || '').localeCompare(b[column] || '')
                     : (b[column] || '').localeCompare(a[column] || ''),
             );
+            copyData = copyData.map((i, idx) => ({ ...i, idx }));
             dataToShow = copyData;
         }
     }
