@@ -18,22 +18,23 @@
 
     span {
         display: inline-block;
+        padding: 0.5em;
     }
 
     .name {
-        width: 40%;
+        width: 300px;
     }
     .insured {
-        width: 10%;
+        width: 70px;
     }
     .wage {
-        width: 10%;
+        width: 100px;
     }
     .econ {
-        width: 20%;
+        width: 300px;
     }
     .municipality {
-        width: 18%;
+        width: 200px;
     }
 
     .active {

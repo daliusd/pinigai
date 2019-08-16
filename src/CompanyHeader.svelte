@@ -3,7 +3,6 @@
 
     export let sortColumn = undefined;
     export let sortAsc = undefined;
-    export let clientHeight;
 
     function setSortColumn(column) {
         if (!sortColumn || sortColumn !== column) {
@@ -28,6 +27,8 @@
         font-weight: bolder;
         padding-bottom: 1em;
         padding-top: 1em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
         user-select: none;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -36,24 +37,28 @@
         -ms-user-select: none;
     }
 
+    span:hover {
+        background-color: #cc8820;
+    }
+
     .name {
-        width: 40%;
+        width: 300px;
     }
     .insured {
-        width: 10%;
+        width: 70px;
     }
     .wage {
-        width: 10%;
+        width: 100px;
     }
     .econ {
-        width: 20%;
+        width: 300px;
     }
     .municipality {
-        width: 18%;
+        width: 200px;
     }
 </style>
 
-<div bind:clientHeight>
+<div>
     <span on:click={() => setSortColumn('n')} class="name">
         Kompanija {sortColumn === 'n' ? (sortAsc ? '▲' : '▼') : ''}
     </span>

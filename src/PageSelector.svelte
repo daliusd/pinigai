@@ -8,10 +8,12 @@
     let refs = [];
 
     afterUpdate(() => {
+        if (itemsPerPage === 0) return;
+
         let totalPages = Math.floor((total - 1) / itemsPerPage);
         let newRefs = [0];
 
-        let bigStep = Math.floor(totalPages / 5);
+        let bigStep = Math.max(Math.floor(totalPages / 5), 1);
         let nextPage = 0;
 
         while (nextPage + bigStep < pageNo) {
@@ -65,7 +67,7 @@
     }
 
     span {
-        margin: 5px;
+        padding: 5px;
     }
 
     span.active {
@@ -78,8 +80,12 @@
 </style>
 
 <div>
-    <span>Puslapis:</span>
-    {#each refs as ref}
-        <span class={ref === pageNo ? 'active' : ''} on:click={() => (pageNo = ref)}>{ref}</span>
-    {/each}
+    {#if itemsPerPage}
+        <span>Puslapis:</span>
+        {#each refs as ref}
+            <span class={ref === pageNo ? 'active' : ''} on:click={() => (pageNo = ref)}>{ref}</span>
+        {/each}
+    {:else}
+        <span>Puslapiavimas išjungtas.</span>
+    {/if}
 </div>

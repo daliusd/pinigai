@@ -13,7 +13,6 @@
 
     let windowWidth;
     let windowHeight;
-    let companyHeaderHeight;
 
     let itemsPerPage = 0;
     let sortColumn;
@@ -81,7 +80,7 @@
 
 <style>
     .companies {
-        min-width: 400px;
+        margin: 10px;
     }
 
     label {
@@ -122,9 +121,9 @@
         {/if}
     </div>
 
-    <div class="companies" style="height: {windowHeight * 0.5}px ">
-        <CompanyHeader bind:sortColumn bind:sortAsc bind:clientHeight={companyHeaderHeight} />
-        <VirtualList items={dataToShow} height="{windowHeight * 0.5 - companyHeaderHeight}px" let:item>
+    <div class="companies">
+        <CompanyHeader bind:sortColumn bind:sortAsc />
+        <VirtualList items={dataToShow} height="{windowHeight * 0.5}px" let:item>
             <Company
                 company={item}
                 active={lastClickedCompany ? lastClickedCompany === item.n : false}
@@ -157,9 +156,7 @@
             <input type="radio" bind:group={itemsPerPage} value={100} />
             100
         </label>
-        {#if itemsPerPage}
-            <PageSelector total={dataToShow.length} {itemsPerPage} bind:pageNo />
-        {/if}
+        <PageSelector total={interData.length} {itemsPerPage} bind:pageNo />
     </div>
 
 {:catch error}
