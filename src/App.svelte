@@ -103,6 +103,18 @@
 </script>
 
 <style>
+    h1 {
+        padding: 0;
+        margin: 0;
+        margin-bottom: 1em;
+        font-size: 1.5em;
+    }
+
+    .loading {
+        color: #c88;
+        font-weight: bold;
+    }
+
     .months {
         margin-top: 1em;
         margin-bottom: 1em;
@@ -112,6 +124,10 @@
 
     .months span.active {
         font-weight: bolder;
+    }
+
+    .months span:hover {
+        color: #fcc;
     }
 
     .months span {
@@ -147,7 +163,7 @@
 </p>
 
 {#await promiseIndex}
-    <p>Palaukite, duomenys kraunami...</p>
+    <p class="loading">Palaukite, duomenys kraunami...</p>
 {:then}
     <div class="months">
         {#each indexData as month}
@@ -175,7 +191,7 @@
 </div>
 
 {#await promise}
-    <p>Palaukite, duomenys kraunami...</p>
+    <p class="loading">Palaukite, duomenys kraunami...</p>
 {:then}
 
     <div class="companies">
