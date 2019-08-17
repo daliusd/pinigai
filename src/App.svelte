@@ -6,6 +6,10 @@
     import CompanyHeader from './CompanyHeader.svelte';
     import PageSelector from './PageSelector.svelte';
 
+    let indexData = [];
+    let promiseIndex;
+    let activeMonth;
+
     let data = [];
     let interData = [];
     let dataToShow = [];
@@ -66,6 +70,14 @@
         ? interData.slice(pageNo * itemsPerPage, pageNo * itemsPerPage + itemsPerPage)
         : interData;
 
+    async function getIndex() {
+        const response = await fetch(`/data/index.json`);
+        const json = await response.json();
+        indexData = json.map(i => i.replace('.json', ''));
+        activeMonth = indexData[indexData.length - 1];
+        promise = await getData(activeMonth);
+    }
+
     async function getData(month) {
         const response = await fetch(`/data/${month}.json`);
         const json = await response.json();
@@ -73,8 +85,13 @@
     }
 
     onMount(async function() {
-        promise = getData('201906');
+        promiseIndex = getIndex();
     });
+
+    async function changeMonth(month) {
+        activeMonth = month;
+        promise = await getData(activeMonth);
+    }
 
     function handleCompanyClick(company) {
         lastClickedCompany = company.n;
@@ -85,6 +102,21 @@
 </script>
 
 <style>
+    .months {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .months span.active {
+        font-weight: bolder;
+    }
+
+    .months span {
+        padding: 0.5em;
+    }
+
     .companies {
         margin: 10px;
     }
@@ -113,25 +145,37 @@
     stulpelio galite informaciją rūšiuoti. Pasirinkus įstaigą iš sąrašo jos informacija įdedama į filtravimo laukus.
 </p>
 
+{#await promiseIndex}
+    <p>Palaukite, duomenys kraunami...</p>
+{:then}
+    <div class="months">
+        {#each indexData as month}
+            <span class={month === activeMonth ? 'active' : ''} on:click={() => changeMonth(month)}>{month}</span>
+        {/each}
+    </div>
+{:catch error}
+    <p style="color: red">{error.message}</p>
+{/await}
+
+<div class="filters">
+    Filtrai:
+    <input bind:value={nameFilter} placeholder="Pavadinimas" />
+    {#if nameFilter}
+        <button on:click={() => (nameFilter = '')}>❌</button>
+    {/if}
+    <input bind:value={econFilter} placeholder="Veikla" />
+    {#if econFilter}
+        <button on:click={() => (econFilter = '')}>❌</button>
+    {/if}
+    <input bind:value={municipalityFilter} placeholder="Regionas" />
+    {#if municipalityFilter}
+        <button on:click={() => (municipalityFilter = '')}>❌</button>
+    {/if}
+</div>
+
 {#await promise}
     <p>Palaukite, duomenys kraunami...</p>
 {:then}
-
-    <div class="filters">
-        Filtrai:
-        <input bind:value={nameFilter} placeholder="Pavadinimas" />
-        {#if nameFilter}
-            <button on:click={() => (nameFilter = '')}>❌</button>
-        {/if}
-        <input bind:value={econFilter} placeholder="Veikla" />
-        {#if econFilter}
-            <button on:click={() => (econFilter = '')}>❌</button>
-        {/if}
-        <input bind:value={municipalityFilter} placeholder="Regionas" />
-        {#if municipalityFilter}
-            <button on:click={() => (municipalityFilter = '')}>❌</button>
-        {/if}
-    </div>
 
     <div class="companies">
         <CompanyHeader bind:sortColumn bind:sortAsc />
@@ -143,45 +187,45 @@
         </VirtualList>
     </div>
 
-    <div>
-        <label>
-            <input type="radio" bind:group={itemsPerPage} value={0} />
-            Nepuslapiuoti
-        </label>
-
-        <label>
-            <input type="radio" bind:group={itemsPerPage} value={10} />
-            10
-        </label>
-
-        <label>
-            <input type="radio" bind:group={itemsPerPage} value={20} />
-            20
-        </label>
-
-        <label>
-            <input type="radio" bind:group={itemsPerPage} value={50} />
-            50
-        </label>
-
-        <label>
-            <input type="radio" bind:group={itemsPerPage} value={100} />
-            100
-        </label>
-        <PageSelector total={interData.length} {itemsPerPage} bind:pageNo />
-    </div>
-
-    <div>
-        <p>Čia rodoma apskaičiuota statistika pritaikius filtrus:</p>
-        <p>Viso išleista algoms: {totalWage.toLocaleString().replace(/,/g, ' ')} €</p>
-        <p>Visas apdraustųjų skaičius: {totalInsured.toLocaleString().replace(/,/g, ' ')}</p>
-        <p>
-            Vidutinė alga: {Math.round(totalWage / totalInsured)
-                .toLocaleString()
-                .replace(/,/g, ' ')} €
-        </p>
-    </div>
-
 {:catch error}
     <p style="color: red">{error.message}</p>
 {/await}
+
+<div>
+    <label>
+        <input type="radio" bind:group={itemsPerPage} value={0} />
+        Nepuslapiuoti
+    </label>
+
+    <label>
+        <input type="radio" bind:group={itemsPerPage} value={10} />
+        10
+    </label>
+
+    <label>
+        <input type="radio" bind:group={itemsPerPage} value={20} />
+        20
+    </label>
+
+    <label>
+        <input type="radio" bind:group={itemsPerPage} value={50} />
+        50
+    </label>
+
+    <label>
+        <input type="radio" bind:group={itemsPerPage} value={100} />
+        100
+    </label>
+    <PageSelector total={interData.length} {itemsPerPage} bind:pageNo />
+</div>
+
+<div>
+    <p>Čia rodoma apskaičiuota statistika pritaikius filtrus:</p>
+    <p>Viso išleista algoms: {totalWage.toLocaleString().replace(/,/g, ' ')} €</p>
+    <p>Visas apdraustųjų skaičius: {totalInsured.toLocaleString().replace(/,/g, ' ')}</p>
+    <p>
+        Vidutinė alga: {Math.round(totalWage / totalInsured)
+            .toLocaleString()
+            .replace(/,/g, ' ')} €
+    </p>
+</div>
