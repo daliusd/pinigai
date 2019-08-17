@@ -140,7 +140,7 @@
 <h1>Pinigai</h1>
 
 <p>
-    Čia galite peržiūrėti Lietuvos įmonių/kompanijų/įstaigų informaciją apie vidutinę algą 2019-ųjų birželio mėnesį.
+    Čia galite peržiūrėti Lietuvos įmonių/kompanijų/įstaigų informaciją apie vidutinę algą ir apdraustųjų skaičių.
     Informaciją galite filtruoti pagal įstaigos pavadinimą, veiklos klasifikatorių arba regioną. Taip pat paspaudę ant
     stulpelio galite informaciją rūšiuoti. Pasirinkus įstaigą iš sąrašo jos informacija įdedama į filtravimo laukus.
 </p>
