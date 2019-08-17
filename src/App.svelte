@@ -129,7 +129,7 @@
 
     <div class="companies">
         <CompanyHeader bind:sortColumn bind:sortAsc />
-        <VirtualList items={dataToShow} height="{windowHeight * 0.4}px" let:item>
+        <VirtualList items={dataToShow} height="{windowHeight * 0.5}px" let:item>
             <Company
                 company={item}
                 active={lastClickedCompany ? lastClickedCompany === item.n : false}

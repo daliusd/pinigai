@@ -25,10 +25,7 @@
     span {
         display: inline-block;
         font-weight: bolder;
-        padding-bottom: 1em;
-        padding-top: 1em;
-        padding-left: 0.5em;
-        padding-right: 0.5em;
+        padding: 0.5em;
         user-select: none;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
