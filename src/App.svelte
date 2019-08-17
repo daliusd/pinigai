@@ -224,6 +224,7 @@
     <p>Čia rodoma apskaičiuota statistika pritaikius filtrus:</p>
     <p>Viso išleista algoms: {totalWage.toLocaleString().replace(/,/g, ' ')} €</p>
     <p>Visas apdraustųjų skaičius: {totalInsured.toLocaleString().replace(/,/g, ' ')}</p>
+    <p>Įstaigų skaičius: {interData.length}</p>
     <p>
         Vidutinė alga: {Math.round(totalWage / totalInsured)
             .toLocaleString()
