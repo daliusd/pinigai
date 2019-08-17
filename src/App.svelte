@@ -75,7 +75,7 @@
         const json = await response.json();
         indexData = json.map(i => i.replace('.json', ''));
         activeMonth = indexData[indexData.length - 1];
-        promise = await getData(activeMonth);
+        promise = getData(activeMonth);
     }
 
     async function getData(month) {
@@ -91,7 +91,7 @@
     async function changeMonth(month) {
         activeMonth = month;
         data = [];
-        promise = await getData(activeMonth);
+        promise = getData(activeMonth);
     }
 
     function handleCompanyClick(company) {
