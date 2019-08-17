@@ -229,3 +229,8 @@
             .replace(/,/g, ' ')} €
     </p>
 </div>
+
+<div>
+    Dalius Dobravolskas &copy; {new Date().getFullYear()}
+    <a href="https://github.com/daliusd/pinigai">GitHub kodo repozitorija</a>
+</div>
