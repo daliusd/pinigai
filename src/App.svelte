@@ -23,6 +23,9 @@
     let econFilter = '';
     let municipalityFilter = '';
 
+    let totalWage;
+    let totalInsured;
+
     $: {
         if (!sortColumn) {
             interData = data;
@@ -53,6 +56,9 @@
             interData = interData.filter(f => f.m.toLowerCase().indexOf(filterLower) !== -1);
         }
         interData = interData.map((i, idx) => ({ ...i, idx }));
+        totalWage = interData.reduce((w, i) => i.w * i.i + w, 0);
+        totalWage = Math.round(totalWage);
+        totalInsured = interData.reduce((t, i) => i.i + t, 0);
     }
 
     $: pageNo = itemsPerPage ? 0 : -1;
@@ -163,6 +169,17 @@
             100
         </label>
         <PageSelector total={interData.length} {itemsPerPage} bind:pageNo />
+    </div>
+
+    <div>
+        <p>Čia rodoma apskaičiuota statistika pritaikius filtrus:</p>
+        <p>Viso išleista algoms: {totalWage.toLocaleString().replace(/,/g, ' ')} €</p>
+        <p>Visas apdraustųjų skaičius: {totalInsured.toLocaleString().replace(/,/g, ' ')}</p>
+        <p>
+            Vidutinė alga: {Math.round(totalWage / totalInsured)
+                .toLocaleString()
+                .replace(/,/g, ' ')} €
+        </p>
     </div>
 
 {:catch error}
