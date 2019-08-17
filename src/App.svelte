@@ -90,6 +90,7 @@
 
     async function changeMonth(month) {
         activeMonth = month;
+        data = [];
         promise = await getData(activeMonth);
     }
 
