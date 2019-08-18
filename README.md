@@ -25,3 +25,11 @@ Einame į [localhost:5000](http://localhost:5000).
 Duomenis reikia pasiimti ir apdoroti naudojant skriptus iš
 [salary-data
 repozitorijos](https://github.com/daliusd/salary-data).
+Rekomenduoju naudoti monthly.js:
+
+```
+node monthly.js kelias/iki/pinigai/public/data
+```
+
+Šis skriptas parsiųs ir apdoros paskutinio mėnesio duomenis iš
+Sodros.
