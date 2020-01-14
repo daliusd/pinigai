@@ -47,6 +47,9 @@
     .wage {
         width: 100px;
     }
+    .wage3 {
+        width: 100px;
+    }
     .econ {
         width: 300px;
     }
@@ -64,6 +67,14 @@
     </span>
     <span on:click={() => setSortColumn('w')} class="wage" title="Vidutinė alga">
         Alga {sortColumn === 'w' ? (sortAsc ? '▲' : '▼') : ''}
+    </span>
+    <span on:click={() => setSortColumn('a3')} class="wage3" title="Vidutinė alga 3">
+        Alga 3 {sortColumn === 'a3' ? (sortAsc ? '▲' : '▼') : ''}
+    </span>
+    <span class="wage3" title="25 proc. kvantilis">25% kv</span>
+    <span class="wage3" title="75 proc. kvantilis">75% kv</span>
+    <span on:click={() => setSortColumn('s3')} class="wage3" title="Standartinis nuokrypis">
+        STD {sortColumn === 's3' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
     <span on:click={() => setSortColumn('e')} class="econ">
         Veikla {sortColumn === 'e' ? (sortAsc ? '▲' : '▼') : ''}

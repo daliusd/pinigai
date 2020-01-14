@@ -36,10 +36,10 @@
         } else {
             let copyData = [...data];
             copyData.sort((a, b) =>
-                sortColumn === 'i' || sortColumn === 'w'
+                sortColumn === 'i' || sortColumn === 'w' || sortColumn === 'a3' || sortColumn === 's3'
                     ? sortAsc
-                        ? a[sortColumn] - b[sortColumn]
-                        : b[sortColumn] - a[sortColumn]
+                        ? (a[sortColumn] || 0) - (b[sortColumn] || 0)
+                        : (b[sortColumn] || 0) - (a[sortColumn] || 0)
                     : sortAsc
                     ? (a[sortColumn] || '').localeCompare(b[sortColumn] || '')
                     : (b[sortColumn] || '').localeCompare(a[sortColumn] || ''),

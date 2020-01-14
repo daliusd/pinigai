@@ -30,6 +30,9 @@
     .wage {
         width: 100px;
     }
+    .wage3 {
+        width: 100px;
+    }
     .econ {
         width: 300px;
     }
@@ -46,6 +49,10 @@
     <span class="name">{company.n}</span>
     <span class="insured">{company.i}</span>
     <span class="wage">{company.w}</span>
+    <span class="wage3">{company.a3 || ''}</span>
+    <span class="wage3">{company.f3 || ''}</span>
+    <span class="wage3">{company.l3 || ''}</span>
+    <span class="wage3">{company.s3 || ''}</span>
     <span class="econ">{company.e || ''}</span>
     <span class="municipality">{company.m}</span>
 </div>
