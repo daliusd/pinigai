@@ -36,7 +36,7 @@
         } else {
             let copyData = [...data];
             copyData.sort((a, b) =>
-                sortColumn === 'i' || sortColumn === 'w' || sortColumn === 'a3' || sortColumn === 's3'
+                ['i', 'w', 'a3', 'm3', 'f3', 'l3', 's3', 'wi'].indexOf(sortColumn) !== -1
                     ? sortAsc
                         ? (a[sortColumn] || 0) - (b[sortColumn] || 0)
                         : (b[sortColumn] || 0) - (a[sortColumn] || 0)
@@ -173,6 +173,10 @@
 {:catch error}
     <p style="color: red">{error.message}</p>
 {/await}
+
+<div>
+    <strong>FUN</strong> stulpelyje paskaičiuota kokia galėtų būti daugiausiai uždirbančio žmogaus alga, jei organizacijoje/įmonėje jis toks būtų tik vienas. Dažniausiai tokių žmonių būna daugiau, taigi realiai daugiausiai uždirbančiojo alga tikėtina bus gerokai mažesnė. Galbūt retais atvejais tą atlyginimą ir atspėjau, bet iš esmės šio skaičiaus nepriimkite labai rimtai ir žiūrėkite kaip į smagų žaidimą.
+</div>
 
 <div class="filters">
     Filtrai:

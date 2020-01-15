@@ -71,10 +71,20 @@
     <span on:click={() => setSortColumn('a3')} class="wage3" title="Vidutinė alga 3">
         Alga 3 {sortColumn === 'a3' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
-    <span class="wage3" title="25 proc. kvantilis">25% kv</span>
-    <span class="wage3" title="75 proc. kvantilis">75% kv</span>
+    <span on:click={() => setSortColumn('m3')} class="wage3" title="Mediana">
+        Med. {sortColumn === 'm3' ? (sortAsc ? '▲' : '▼') : ''}
+    </span>
+    <span on:click={() => setSortColumn('f3')} class="wage3" title="25 proc. kvantilis">
+        25% kv {sortColumn === 'f3' ? (sortAsc ? '▲' : '▼') : ''}
+    </span>
+    <span on:click={() => setSortColumn('l3')} class="wage3" title="75 proc. kvantilis">
+        75% kv {sortColumn === 'l3' ? (sortAsc ? '▲' : '▼') : ''}
+    </span>
     <span on:click={() => setSortColumn('s3')} class="wage3" title="Standartinis nuokrypis">
         STD {sortColumn === 's3' ? (sortAsc ? '▲' : '▼') : ''}
+    </span>
+    <span on:click={() => setSortColumn('wi')} class="wage3" title="O kas jeigu?">
+        FUN {sortColumn === 'wi' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
     <span on:click={() => setSortColumn('e')} class="econ">
         Veikla {sortColumn === 'e' ? (sortAsc ? '▲' : '▼') : ''}
