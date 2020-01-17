@@ -150,6 +150,15 @@
         margin-left: -40px;
         width: 40px;
     }
+
+    .exp {
+        padding: 0;
+    }
+
+    .exp ol {
+        padding-top: 1em;
+        padding-top: 1em;
+    }
 </style>
 
 <svelte:window bind:innerWidth={windowWidth} bind:innerHeight={windowHeight} />
@@ -162,6 +171,47 @@
     stulpelio galite informaciją rūšiuoti. Pasirinkus įstaigą iš sąrašo jos informacija įdedama į filtravimo laukus.
 </p>
 
+<div>
+    Stulpelių paaiškinimas:
+    <ul class="exp">
+        <ol>
+            <strong>Alga</strong>
+            Vidutinė alga įmonėje/organizacijoje neatsižvelgiant į tai, kiek žmogus joje išdirbo. Šį skaičių dažnai
+            iškreipia žmonės išeinantys iš darbo ir gaunantys išeitinė kompensaciją.
+        </ol>
+        <ol>
+            <strong>A3</strong>
+            Vidutinė alga įmonėje/organizacijoje skaičiuojant tik tuos žmones, kurie išdirbo visą laiką.
+        </ol>
+        <ol>
+            <strong>25% kv</strong>
+            25% kvantilis įmonėje/organizacijoje skaičiuojant tik tuos žmones, kurie išdirbo visą laiką. Pvz.: kiek
+            uždirbo 25-tas žmogus iš 100to, jei įmonėje 100tas žmonių.
+        </ol>
+        <ol>
+            <strong>Med.</strong>
+            Mediana įmonėje/organizacijoje skaičiuojant tik tuos žmones, kurie išdirbo visą laiką. Pvz.: kiek uždirbo
+            50-tas žmogus iš 100to, jei įmonėje 100tas žmonių.
+        </ol>
+        <ol>
+            <strong>75% kv</strong>
+            75% kvantilis įmonėje/organizacijoje skaičiuojant tik tuos žmones, kurie išdirbo visą laiką. Pvz.: kiek
+            uždirbo 75-tas žmogus iš 100to, jei įmonėje 100tas žmonių.
+        </ol>
+        <ol>
+            <strong>STD</strong>
+            Standartinis nuokrypis.
+        </ol>
+        <ol>
+            <strong>FUN</strong>
+            šiame stulpelyje paskaičiuota kokia galėtų būti daugiausiai uždirbančio žmogaus alga, jei
+            organizacijoje/įmonėje jis toks būtų tik vienas. Dažniausiai tokių žmonių būna daugiau, taigi realiai
+            daugiausiai uždirbančiojo alga tikėtina bus gerokai mažesnė. Galbūt retais atvejais tą atlyginimą ir
+            atspėjau, bet iš esmės šio skaičiaus nepriimkite labai rimtai ir žiūrėkite kaip į smagų žaidimą.
+        </ol>
+    </ul>
+</div>
+
 {#await promiseIndex}
     <p class="loading">Palaukite, duomenys kraunami...</p>
 {:then}
@@ -173,10 +223,6 @@
 {:catch error}
     <p style="color: red">{error.message}</p>
 {/await}
-
-<div>
-    <strong>FUN</strong> stulpelyje paskaičiuota kokia galėtų būti daugiausiai uždirbančio žmogaus alga, jei organizacijoje/įmonėje jis toks būtų tik vienas. Dažniausiai tokių žmonių būna daugiau, taigi realiai daugiausiai uždirbančiojo alga tikėtina bus gerokai mažesnė. Galbūt retais atvejais tą atlyginimą ir atspėjau, bet iš esmės šio skaičiaus nepriimkite labai rimtai ir žiūrėkite kaip į smagų žaidimą.
-</div>
 
 <div class="filters">
     Filtrai:

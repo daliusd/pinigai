@@ -69,13 +69,13 @@
         Alga {sortColumn === 'w' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
     <span on:click={() => setSortColumn('a3')} class="wage3" title="Vidutinė alga 3">
-        Alga 3 {sortColumn === 'a3' ? (sortAsc ? '▲' : '▼') : ''}
-    </span>
-    <span on:click={() => setSortColumn('m3')} class="wage3" title="Mediana">
-        Med. {sortColumn === 'm3' ? (sortAsc ? '▲' : '▼') : ''}
+        A3 {sortColumn === 'a3' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
     <span on:click={() => setSortColumn('f3')} class="wage3" title="25 proc. kvantilis">
         25% kv {sortColumn === 'f3' ? (sortAsc ? '▲' : '▼') : ''}
+    </span>
+    <span on:click={() => setSortColumn('m3')} class="wage3" title="Mediana">
+        Med. {sortColumn === 'm3' ? (sortAsc ? '▲' : '▼') : ''}
     </span>
     <span on:click={() => setSortColumn('l3')} class="wage3" title="75 proc. kvantilis">
         75% kv {sortColumn === 'l3' ? (sortAsc ? '▲' : '▼') : ''}

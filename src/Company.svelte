@@ -50,8 +50,8 @@
     <span class="insured">{company.i}</span>
     <span class="wage">{company.w}</span>
     <span class="wage3">{company.a3 || ''}</span>
-    <span class="wage3">{company.m3 || ''}</span>
     <span class="wage3">{company.f3 || ''}</span>
+    <span class="wage3">{company.m3 || ''}</span>
     <span class="wage3">{company.l3 || ''}</span>
     <span class="wage3">{company.s3 || ''}</span>
     <span class="wage3">{company.wi || ''}</span>
